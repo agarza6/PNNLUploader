@@ -1,0 +1,29 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from OrgWithMembersService WSDL service -->
+
+  <service name="OrgWithMembers" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://trust.utep.edu"/>
+      <parameter name="wsdlServiceElement" value="OrgWithMembersService"/>
+      <parameter name="schemaQualified" value="http://trust.utep.edu"/>
+      <parameter name="wsdlServicePort" value="OrgWithMembers"/>
+      <parameter name="className" value="edu.utep.trust.OrgWithMembersSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="OrgWithMembers"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getOrgMembersContent" qname="operNS:getOrgMembersContent" xmlns:operNS="http://trust.utep.edu" returnQName="retNS:getOrgMembersContentReturn" xmlns:retNS="http://trust.utep.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:URL" xmlns:pns="http://trust.utep.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getOrgMembersContent"/>
+
+  </service>
+</deployment>
